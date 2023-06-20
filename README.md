@@ -22,9 +22,11 @@ This is a template for users looking to deploy their own FastAPI app with a Hugg
 
 - Clone the repo to your workspace: `git clone https://github.com/gradient-ai/FastAPI-Template-App.git`
 - Make updates to your application (e.g. application files, Dockerfile, requirements.txt)
+- Change the Hugging Face model used in the app
 - Build a new image by running `docker build -t my-image:tag .`
 - Push image to the container registry of your choice by running `docker push my-image:tag`
 - Update the app config at `paperspace.yaml` with the location of your new image
+- Update the app config with your choice of Hugging Face model. When using integrations, mounts will be located at /opt/integrations/<name>
 - Deploy your application on Paperspace by running [`pspace up`](https://docs-next.paperspace.com/cli/up). Ensure you have the [Paperspace CLI](https://github.com/Paperspace/cli#installation) installed.
 
 ## How to deploy
@@ -36,6 +38,14 @@ This is a template for users looking to deploy their own FastAPI app with a Hugg
 ## Simplify your deployment workflow with GitHub Actions
 
 Use the [Paperspace Deploy Action](https://github.com/Paperspace/deploy-action) to integrate a build/push process into your CI/CD pipeline.
+
+## Benefits of Hugging Face integrations
+
+Hugging Face integrations are a simple way to integrate Hugging Face models into your application while improving start time performance for auto-scaling and production level applications.
+
+A Hugging Face integration happens once at the beginning of each new application deployment (i.e. each app config update). A temporary volume is created, the Hugging Face repo is then cloned into that volume, and that volume is then mounted to your container on startup at `/opt/integrations/<integration-name>`. Any new replicas that are spun up due to auto-scaling will also have the volume mounted to the same path, without having to go through the repo cloning process again, which shortens startup times for each subsequent replica spin up. Learn more about integrations in the [Paperspace docs](https://docs-next.paperspace.com/).
+
+
 
 ## Documentation
 
