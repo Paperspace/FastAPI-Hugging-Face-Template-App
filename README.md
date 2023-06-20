@@ -34,6 +34,8 @@ This is a template for users looking to deploy their own FastAPI app with a Hugg
 - Download the [Paperspace CLI](https://github.com/Paperspace/cli#installation)
 - Run [`pspace init -t https://github.com/gradient-ai/FastAPI-Template-App`](https://docs-next.paperspace.com/cli/init) to initialize you app. This will create an app locally, clone this GitHub repo as your app template, and remotely link your app to Paperspace so you can add [secrets](https://docs-next.paperspace.com/secrets) and collaborators.
 - Run [`pspace up`](https://docs-next.paperspace.com/cli/up) to deploy your app on Paperspace. This will send the app config at [paperspace.yaml)(paperspace.yaml) to Paperspace, which will spin up your application.
+- Once the application is in a ready state, you can send a translation request to the endpoint using the application URL:
+`curl -X GET '<application-url>/translate?text_input=Hello+world!'`
 
 ## Simplify your deployment workflow with GitHub Actions
 
