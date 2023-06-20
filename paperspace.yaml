@@ -1,0 +1,45 @@
+apiVersion: v1
+# To disable the application change enabled: false
+enabled: true
+# The name of your project
+name: my-fastapi-hf-app
+# You should replace this with a Docker image you build
+image: paperspace/fastapi-hf-template-app:2023-06-20
+# The port the service is running on inside the above image
+# Using integrations to bring in external resource
+# (e.g. Hugging Face model, S3 bucket)
+integrations:
+  - type: git-lfs # git-lfs used for Hugging Face models
+    name: opus-mt-en-es
+    url: https://huggingface.co/Helsinki-NLP/opus-mt-en-es # English to Spanish translation model
+# Deploy safely by using health checks, preventing traffic from being 
+# routed to unhealthy instances
+healthChecks:
+  startup:
+    path: /
+    port: 8000
+  readiness:
+    path: /
+    port: 8000
+  liveness:
+    path: /
+    port: 8000
+# The resources section defines the compute resources used by your service. 
+# You can specify a number of replicas, an instance type, and autoscaling 
+# settings here.
+resources:
+  replicas: 1
+  machineType: A4000
+  ports: [8000]
+  autoscaling:
+    enabled: true
+    maxReplicas: 2
+    metrics:
+      - metric: requestDuration
+        summary: average
+        value: 1.2
+      - metric: cpu
+        summary: average
+        value: 75
+
+
