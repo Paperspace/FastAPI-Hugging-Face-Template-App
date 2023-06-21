@@ -25,7 +25,7 @@ healthChecks:
     port: 8000
 # The resources section defines the compute resources used by your service. 
 # You can specify a number of replicas, an instance type, and autoscaling 
-# settings here.
+# settings here
 resources:
   replicas: 1
   machineType: A4000
