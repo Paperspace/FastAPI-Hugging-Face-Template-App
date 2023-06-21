@@ -11,6 +11,7 @@ integrations:
   - type: git-lfs # git-lfs used for Hugging Face models
     name: opus-mt-en-es
     url: https://huggingface.co/Helsinki-NLP/opus-mt-en-es # English to Spanish translation model
+    path: /opt/integrations/opus-mt-en-es
 # Deploy safely by using health checks, preventing traffic from being 
 # routed to unhealthy instances
 healthChecks:
