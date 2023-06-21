@@ -5,7 +5,6 @@ enabled: true
 name: my-fastapi-hf-app
 # You should replace this with a Docker image you build
 image: paperspace/fastapi-hf-template-app:2023-06-20
-# The port the service is running on inside the above image
 # Using integrations to bring in external resource
 # (e.g. Hugging Face model, S3 bucket)
 integrations:
@@ -30,6 +29,7 @@ healthChecks:
 resources:
   replicas: 1
   machineType: A4000
+  # The port the service is running on inside the above image
   ports: [8000]
   autoscaling:
     enabled: true
